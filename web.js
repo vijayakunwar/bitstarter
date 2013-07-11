@@ -1,14 +1,17 @@
-var express = require('express');
+var express=require('express');
 
-var app = express.createServer(express.logger());
+var fs=require('fs');
+var app= express.createServer(express.logger());
 
-app.get('/',function(request, responsep) {
-var fs = require('fs');
-var buf = new Buffer(fs.readFileSync('index.html'),'utf-8');  
-response.send(buf.toString());
+var content = fs.readFileSync("~/bitstarter/index.html","utf-8");
+
+var buffer= new Buffer(256);
+
+app.get('/',function(request,response){
+response.send(buffer.toString("utf-8",content));
 });
 
 var port = process.env.PORT || 5000;
-app.listen(port, function() {
-  console.log("Listening on " + port);
+app.listen(port,function(){
+console.log("Listening on"+port);
 });
